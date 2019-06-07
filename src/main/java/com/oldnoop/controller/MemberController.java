@@ -43,7 +43,6 @@ public class MemberController {
 	/**
 	 * 注册，将用户名及密码添加到数据库
 	 * 
-	 * @param user
 	 * @return
 	 */
 	@RequestMapping("/register")
@@ -72,7 +71,6 @@ public class MemberController {
 	 * 登录
 	 * 
 	 * @param ma
-	 * @param password
 	 * @param session
 	 * @return
 	 */
@@ -153,7 +151,6 @@ public class MemberController {
 	
 	/**
 	 * 修改密码
-	 * @param member
 	 * @return
 	 */
 	@RequestMapping("/editPwd")
@@ -191,10 +188,10 @@ public class MemberController {
 	@RequestMapping("/logs")
 	public String logs(HttpSession session,Model model) {
 		Member m = (Member) session.getAttribute("member");
-		if(m==null){
-			return "redirect:/member/toLogin";
-		}
-		Long mid = m.getId();
+        if (m == null) {
+            return "redirect:/member/toLogin";
+        }
+        Long mid = m.getId();
 		List<MemberLoginLog> logs = loginLogService.findByMid(mid);
 		model.addAttribute("logs", logs);
 		List<MemberInfoLog> infoLogs = infoLogService.findByMid(mid);
